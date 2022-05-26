@@ -76,13 +76,13 @@ exports.updateProfile = async (req, res) => {
 
     data.idUser = req.user.id;
     data.image = req.file.filename;
+    const { id } = req.params;
 
-    await profile.update(req.body, {
+    await profile.update(data, {
       where: {
         id,
-      }});
-
-
+      }
+    });
     const profileData = await profile.findOne({
       where: {
         idUser:data.idUser,

@@ -13,7 +13,11 @@ const {
     getUserProducts, 
 } = require('../controllers/user')
 //profile
-const { getProfile,addProfile,updateProfile } = require('../controllers/profile');
+const { 
+    getProfile,
+    addProfile,
+    updateProfile 
+} = require('../controllers/profile');
 //product
 const { 
     getProducts, 
@@ -57,7 +61,7 @@ router.get('/user-products', getUserProducts);
 //profile
 router.get('/profiles',auth, getProfile);
 router.post('/profile',auth,uploadFile('image'), addProfile);
-router.post('/profile/:id',auth,uploadFile('image'), updateProfile);
+router.patch('/profile/:id',auth,uploadFile('image'), updateProfile);
 //product
 router.get('/products',auth,getProducts)//add authentication based on token
 router.get('/product/:id', getProduct)
