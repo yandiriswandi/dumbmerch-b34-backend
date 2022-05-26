@@ -13,7 +13,7 @@ const {
     getUserProducts, 
 } = require('../controllers/user')
 //profile
-const { getProfile,addProfile } = require('../controllers/profile');
+const { getProfile,addProfile,updateProfile } = require('../controllers/profile');
 //product
 const { 
     getProducts, 
@@ -43,6 +43,8 @@ const { register, login } = require('../controllers/auth');
 // Middleware
 const { auth } = require('../middlewares/auth');
 const { uploadFile } = require('../middlewares/uploadFile');
+//sorting
+const {getCelana,getBaju} = require('../controllers/sorting')
 
 // Route
 //user
@@ -55,6 +57,7 @@ router.get('/user-products', getUserProducts);
 //profile
 router.get('/profiles',auth, getProfile);
 router.post('/profile',auth,uploadFile('image'), addProfile);
+router.post('/profile/:id',auth,uploadFile('image'), updateProfile);
 //product
 router.get('/products',auth,getProducts)//add authentication based on token
 router.get('/product/:id', getProduct)
@@ -76,5 +79,8 @@ router.delete('/transaction/:id', deleteTransaction)
 //auth
 router.post('/register', register);
 router.post('/login', login);
+//sorting
+router.get('/celana',getCelana);
+router.get('/baju',getBaju);
 
 module.exports = router
