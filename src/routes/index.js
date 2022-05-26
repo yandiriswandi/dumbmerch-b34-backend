@@ -10,9 +10,10 @@ const {
     addUsers, 
     updateUser, 
     deleteUser, 
-    getProfile,
     getUserProducts, 
 } = require('../controllers/user')
+//profile
+const { getProfile,addProfile } = require('../controllers/profile');
 //product
 const { 
     getProducts, 
@@ -50,13 +51,15 @@ router.get('/user/:id', getUser)
 router.post('/user', addUsers)
 router.patch('/user/:id', updateUser)
 router.delete('/user/:id', deleteUser)
-router.get('/profiles', getProfile);
 router.get('/user-products', getUserProducts);
+//profile
+router.get('/profiles',auth, getProfile);
+router.post('/profile',auth,uploadFile('image'), addProfile);
 //product
 router.get('/products',auth,getProducts)//add authentication based on token
 router.get('/product/:id', getProduct)
 router.post('/product',auth, uploadFile('image'), addProduct)//insert middleware
-router.patch('/product/:id',auth, updateProduct)
+router.patch('/product/:id',auth, uploadFile('image'), updateProduct)
 router.delete('/product/:id',auth, deleteProduct)
 //category
 router.get('/categories', getCategories)
